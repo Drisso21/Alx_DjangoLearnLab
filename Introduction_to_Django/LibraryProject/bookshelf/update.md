@@ -1,15 +1,12 @@
-
 ```markdown
-# Delete the Book
+# Update the Book Title
 
 ```python
 from bookshelf.models import Book
-book = Book.objects.get(title="Nineteen Eighty-Four")
-book.delete()
+book = Book.objects.get(title="1984")
+book.title = "Nineteen Eighty-Four"
+book.save()
+book
 
-Book.objects.all()
-python
-Copy
-Edit
 # Output:
-<QuerySet []>  # Book successfully deleted
+<Book: Nineteen Eighty-Four (1949)>

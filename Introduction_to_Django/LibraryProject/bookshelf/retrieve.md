@@ -1,12 +1,10 @@
-# Create a Book
+```markdown
+# Retrieve the Book
 
 ```python
 from bookshelf.models import Book
-book = Book(title="1984", author="George Orwell", publication_year=1949)
-book.save()
-book
-python
-Copy
-Edit
+book = Book.objects.get(title="1984")
+book.title, book.author, book.publication_year
+
 # Output:
-<Book: 1984 (1949)>  # Book successfully created
+('1984', 'George Orwell', 1949)
