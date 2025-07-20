@@ -1,6 +1,7 @@
 import os
 import django
 from relationship_app.models import Author, Book, Library, Librarian
+Author.objects.filter(name="George Orwell").delete()
 
 
 #os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LibraryProject.settings')
@@ -32,6 +33,8 @@ print("✅ Sample data populated successfully.")
 
 
 author_name = "George Orwell"
+
+george = Author.objects.get(name=author_name)
 
 authors = Author.objects.filter(name=author_name)
 for author in authors:
