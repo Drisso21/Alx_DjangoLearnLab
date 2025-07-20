@@ -53,6 +53,8 @@ for b in lib.books.all():
 # Retrieve the librarian for a library
 print(f"\nLibrarian for library '{lib.name}': {lib.librarian.name}")
 
+Librarianss = Librarian.objects.get(library=lib).name
+
 # ✅ Retrieve all staff (librarian queryset)
 print("\nAll staff (librarians):")
 staffqs = Librarian.objects.all()
