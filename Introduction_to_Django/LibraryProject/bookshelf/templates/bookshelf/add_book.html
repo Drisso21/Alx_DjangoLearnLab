@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajouter un Livre</title>
+</head>
+<body>
+    <h1>Ajouter un Livre</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>Titre :</label><br>
+        <input type="text" name="title"><br><br>
+
+        <label>Auteur :</label><br>
+        <input type="text" name="author"><br><br>
+
+        <label>Année de publication :</label><br>
+        <input type="number" name="publication_year"><br><br>
+
+        <button type="submit">Ajouter</button>
+    </form>
+    <p><a href="/">← Retour à la liste</a></p>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<!-- bookshelf/templates/bookshelf/book_list.html -->
+<h2>Liste des Livres</h2>
+<ul>
+  {% for book in books %}
+    <li>{{ book.title }} - {{ book.author }} ({{ book.publication_year }})</li>
+  {% empty %}
+    <li>Aucun livre trouvé.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'add_book' %}">Ajouter un livre</a>
