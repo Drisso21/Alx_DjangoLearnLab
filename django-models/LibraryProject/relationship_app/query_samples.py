@@ -29,13 +29,16 @@ Librarian.objects.create(name="Alice", library=lib1)
 Librarian.objects.create(name="Bob", library=lib2)
 
 print("✅ Sample data populated successfully.")
+
+
 george = Author.objects.get(name="George Orwell")
 print(f"Books by {george.name}:")
 for b in george.books.all():
     print(f"- {b.title}")
 
 # List all books in a library
-lib = Library.objects.get(name="Central Library")
+library_name = "Central Library"
+lib = Library.objects.get(name=library_name)
 print(f"\nBooks in library '{lib.name}':")
 for b in lib.books.all():
     print(f"- {b.title}")
