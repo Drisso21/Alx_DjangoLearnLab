@@ -1,17 +1,25 @@
 from django.db import models
 
-class author(models.Model):
+class Author(models.Model):
     name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 
 
-class book(models.Model):
+class Book(models.Model):
     title = models.CharField(max_length=200)
-    author = models.ForeignKey(author, on_delete=models.CASCADE, related_name='books')
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
+    def __str__(self):
+        return self.title
 
-class library(models.Model):
+class Library(models.Model):
     name = models.CharField(max_length=100)
-    books = models.ManyToManyField(book, related_name='libraries')
+    books = models.ManyToManyField(Book, related_name='libraries')
+    def __str__(self):
+        return self.name
 
-class librarian(models.Model):
+class Librarian(models.Model):
     name = models.CharField(max_length=100)
-    library = models.OneToOneField(library, on_delete=models.CASCADE, related_name='librarian')
+    library = models.OneToOneField(Library, on_delete=models.CASCADE, related_name='librarian')
+    def __str__(self):
+        return self.name
