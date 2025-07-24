@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', lambda request: redirect('list_books')),  # redirige vers /books/
     path('', include('relationship_app.urls')),
+    
 ]

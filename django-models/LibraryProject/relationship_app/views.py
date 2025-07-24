@@ -47,3 +47,30 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')  # Après logout, renvoie à login
+
+
+from django.contrib.auth.decorators import user_passes_test, login_required
+from .models import UserProfile
+
+def check_role(role):
+    def inner(user):
+        try:
+            return user.userprofile.role == role
+        except UserProfile.DoesNotExist:
+            return False
+    return inner
+
+@user_passes_test(check_role('Admin'))
+@login_required
+def admin_view(request):
+    return render(request, 'relationship_app/admin_view.html')
+
+@user_passes_test(check_role('Librarian'))
+@login_required
+def librarian_view(request):
+    return render(request, 'relationship_app/librarian_view.html')
+
+@user_passes_test(check_role('Member'))
+@login_required
+def member_view(request):
+    return render(request, 'relationship_app/member_view.html')
