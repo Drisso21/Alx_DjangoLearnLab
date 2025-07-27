@@ -57,26 +57,26 @@ def logout_view(request):
 
 # views.py or a utils.py you import from
 
-def admin(user):
+def Admin(user):
     return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
 
-def librarian(user):
+def Librarian(user):
     return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
 
-def member(user):
+def Member(user):
     return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
 
-@user_passes_test(admin)
+@user_passes_test(Admin)
 @login_required
 def admin_view(request):
     return render(request, 'relationship_app/admin_view.html')
 
-@user_passes_test(librarian)
+@user_passes_test(Librarian)
 @login_required
 def librarian_view(request):
     return render(request, 'relationship_app/librarian_view.html')
 
-@user_passes_test(member)
+@user_passes_test(Member)
 @login_required
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
