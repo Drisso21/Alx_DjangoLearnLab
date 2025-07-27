@@ -55,25 +55,28 @@ def logout_view(request):
 
 
 
-def check_role(role):
-    def inner(user):
-        try:
-            return user.userprofile.role == role
-        except UserProfile.DoesNotExist:
-            return False
-    return inner
+# views.py or a utils.py you import from
 
-@user_passes_test(check_role('Admin'))
+def admin(user):
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
+
+def librarian(user):
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
+
+def member(user):
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
+
+@user_passes_test(admin)
 @login_required
 def admin_view(request):
     return render(request, 'relationship_app/admin_view.html')
 
-@user_passes_test(check_role('Librarian'))
+@user_passes_test(librarian)
 @login_required
 def librarian_view(request):
     return render(request, 'relationship_app/librarian_view.html')
 
-@user_passes_test(check_role('Member'))
+@user_passes_test(member)
 @login_required
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
