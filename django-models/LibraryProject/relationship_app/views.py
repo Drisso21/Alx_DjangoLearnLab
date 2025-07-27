@@ -23,7 +23,7 @@ class LibraryDetailView(DetailView):
     template_name = 'relationship_app/library_detail.html'
     context_object_name = 'library'
 
-#  Register view
+
 def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -35,7 +35,7 @@ def register_view(request):
         form = UserCreationForm()
     return render(request, 'relationship_app/register.html', {'form': form})
 
-#  Login view
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -55,7 +55,6 @@ def logout_view(request):
 
 
 
-# views.py or a utils.py you import from
 
 def Admin(user):
     return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
@@ -86,7 +85,7 @@ def member_view(request):
 
 
 
-# Ajouter un livre
+
 @permission_required('relationship_app.can_add_book')
 def add_book(request):
     if request.method == 'POST':
