@@ -7,7 +7,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.decorators import user_passes_test, login_required
+from .models import UserProfile
+from .forms import BookForm
+from django.contrib.auth.decorators import permission_required
 
 # Function-Based View
 def list_books(request):
@@ -50,8 +53,7 @@ def logout_view(request):
     return redirect('login')  # Après logout, renvoie à login
 
 
-from django.contrib.auth.decorators import user_passes_test, login_required
-from .models import UserProfile
+
 
 def check_role(role):
     def inner(user):
@@ -78,10 +80,7 @@ def member_view(request):
 
 
 
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Book
-from .forms import BookForm
-from django.contrib.auth.decorators import permission_required
+
 
 
 # Ajouter un livre
