@@ -137,3 +137,56 @@ AUTH_USER_MODEL = 'bookshelf.CustomUser'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+DEBUG = False  # For production
+
+# Prevent MIME-type sniffing
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enable XSS protection
+SECURE_BROWSER_XSS_FILTER = True
+
+# Prevent your site from being framed (clickjacking)
+X_FRAME_OPTIONS = 'DENY'
+
+# Enforce HTTPS for cookies
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# Optional: HSTS (HTTP Strict Transport Security)
+SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+# Recommended in production
+ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1']  # Customize this
+
+# Content Security Policy middleware (see below)
+INSTALLED_APPS += ['csp']
+MIDDLEWARE += ['csp.middleware.CSPMiddleware']
+
+# Basic CSP example
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'",)
+CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com')
+CSP_FONT_SRC = ("'self'", 'https://fonts.gstatic.com')
+
+# SECURITY CONFIGURATIONS
+# DEBUG is False for production to prevent leaking sensitive info.
+# CSRF and SESSION cookies are set to secure to enforce HTTPS.
+# X_FRAME_OPTIONS set to 'DENY' to prevent clickjacking.
+# CSP headers added via django-csp middleware to mitigate XSS.
+
+# ✅ Security Settings (recommended for production)
+
+# Protect against XSS (cross-site scripting)
+SECURE_BROWSER_XSS_FILTER = True
+
+# Protect against clickjacking
+X_FRAME_OPTIONS = 'DENY'
+
+# Prevent the browser from MIME-sniffing a response away from the declared content-type
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Ensure cookies are only sent over HTTPS
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
