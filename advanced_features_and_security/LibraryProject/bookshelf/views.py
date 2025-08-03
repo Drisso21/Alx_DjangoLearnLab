@@ -1,21 +1,23 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import permission_required
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Book
-from .forms import BookForm
 
-def add_book(request):
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        author = request.POST.get('author')
-        year = request.POST.get('publication_year')
-
-        # Création du livre
-        Book.objects.create(title=title, author=author, publication_year=year)
-        return redirect('/')  # redirection vers la liste
-
-    return render(request, 'bookshelf/add_book.html')
-
-def book_list(request):
+@permission_required('bookshelf.can_view', raise_exception=True)
+def view_books(request):
     books = Book.objects.all()
-    return render(request, 'bookshelf/book_list.html', {'books': books})
+    return render(request, 'bookshelf/view_books.html', {'books': books})
 
-# Create your views here.
+@permission_required('bookshelf.can_create', raise_exception=True)
+def create_book(request):
+    # Logic to create a book
+    pass
+
+@permission_required('bookshelf.can_edit', raise_exception=True)
+def edit_book(request, pk):
+    # Logic to edit a book
+    pass
+
+@permission_required('bookshelf.can_delete', raise_exception=True)
+def delete_book(request, pk):
+    # Logic to delete a book
+    pass
