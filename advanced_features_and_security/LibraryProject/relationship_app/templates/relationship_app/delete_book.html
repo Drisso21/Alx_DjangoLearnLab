@@ -1,0 +1,17 @@
+<!-- relationship_app/templates/relationship_app/delete_book.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supprimer le livre</title>
+</head>
+<body>
+    <h1>Supprimer le livre</h1>
+    <p>Es-tu sûr de vouloir supprimer <strong>{{ book.title }}</strong> ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmer la suppression</button>
+    </form>
+    <a href="{% url 'list_books' %}">Annuler</a>
+</body>
+</html>
