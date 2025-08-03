@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Book
 
+from django.db.models import Q
 
 def book_list(request):
     books = Book.objects.all()
@@ -25,3 +26,9 @@ def edit_book(request, pk):
 def delete_book(request, pk):
     # Logic to delete a book
     pass
+
+
+def search_books(request):
+    title = request.GET.get('title', '')
+    books = Book.objects.filter(Q(title__icontains=title))
+    return render(request, 'bookshelf/book_list.html', {'books': books})
